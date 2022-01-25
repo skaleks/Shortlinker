@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Short Link</title>
+</head>
+<body>
+<div>
+    <h1>Сервис коротких ссылок</h1>
+</div>
+<form th:action=@{/} method="POST" th:object=${url}>
+    <label for="targeturl">Введите ваш URL:</label>
+    <input type="url" id="targeturl">
+    <button type="submit">Сократить!</button>
+</form>
+</body>
+</html>
