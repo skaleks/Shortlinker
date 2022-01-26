@@ -7,7 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.AllArgsConstructor;
 
@@ -37,4 +40,9 @@ public class MainController {
           return ResponseEntity.notFound().build();
       }
 	}
+
+  @RequestMapping(value = "/", consumes="application/json", produces = "application/json")
+  public @ResponseBody String createShortUrl(@RequestBody String originalUrl){
+    return originalUrl + " govno";
+  }
 }

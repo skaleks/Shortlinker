@@ -3,24 +3,44 @@
 <head>
     <meta charset="UTF-8" />
     <title>Short Link</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <script defer src="/shortlink/src/main/resources/js/main.js"></script> -->
 </head>
 <body>
 <div>
     <h1>Сервис коротких ссылок</h1>
 </div>
-<form th:action=@{/} method="POST" th:object=${url}>
+<div>
     <label for="targeturl">Введите ваш URL:</label>
-    <input type="url" id="targeturl">
-    <button type="submit">Сократить!</button>
-</form>
+    <input type="text" id="targeturl" placeholder="https://www.google.ru/">
+    <button id="button">Сократить!</button>
+</div>
+<p class="result" style="color:rgb(59, 214, 111)"></p>
 
-<table>
-    <th>Все ссылки</th>
-    <tr>
-        <td> Первый</td>
-        <td> Второй</td>
-        <td> Третий</td>
-    </tr>
-</table>
+<script>
+function generateShortUrl(){
+
+    const targetUrl = document.querySelector('#targeturl');
+    const resultField = document.querySelector('.result');
+    const xhr = new XMLHttpRequest();
+    const url = "http://localhost:8080/";
+
+    xhr.open("POST", url);
+    xhr.setRequestHeader("Content-Type", "application/json")
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          resultField.innerHTML = this.responseText;
+        }
+      };
+
+    const data = JSON.stringify({"targetUrl": targetUrl.value});
+    xhr.send(data);
+}
+
+    const shortButton = document.querySelector('#button');
+    shortButton.addEventListener("click", generateShortUrl)
+
+</script>
 </body>
 </html>
