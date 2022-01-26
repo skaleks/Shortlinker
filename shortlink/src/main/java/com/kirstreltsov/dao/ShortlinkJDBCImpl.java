@@ -1,31 +1,28 @@
 package com.kirstreltsov.dao;
 
+import com.kirstreltsov.model.URLS;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository("shortlinkJDBC")
-public class ShortlinkJDBCImpl implements Shortlinkrepo{
+public class ShortlinkJDBCImpl implements ShortlinkJDBC{
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public String findURLByShortName(String shortUrl) {
+    public URLS findURLByShortName(String shortUrl) {
 
         return jdbcTemplate.queryForObject(
-                "select longUrl from url where shortUrl = ?",
-                new Object[]{shortUrl},
-                String.class);
+                "SELECT long_url FROM URLS WHERE short_url = ?",
+                new Object[]{shortUrl}, new BeanPropertyRowMapper<URLS>(URLS.class));
     }
 
     @Override
-    public int saveLongURLtoDB(String longUrl) {
-        return jdbcTemplate.update("insert into url (shortUrl, longUrl) values(?,?)", generateShortUrl() ,longUrl);
+    public int saveLongURLtoDB(String shortUrl, String longUrl) {
+        return jdbcTemplate.update("insert into url (short_Url, long_Url) values(?,?)", shortUrl ,longUrl);
     }
-
-    private String generateShortUrl() {
-        return "";
-    }
-    
 }
