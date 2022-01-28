@@ -1,13 +1,10 @@
 package com.kirstreltsov.service;
 
 import java.io.IOException;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kirstreltsov.dao.ShortlinkJDBC;
+import com.kirstreltsov.dao.ShortlinkRepository;
+import com.kirstreltsov.util.RandomShortlinkGenerator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,22 +19,21 @@ public class ShortlinkService {
     Logger LOGGER = LoggerFactory.getLogger(ShortlinkService.class);
 
     @Autowired
-    ShortlinkJDBC dao;
+    ShortlinkRepository dao;
+
+    @Autowired
+    RandomShortlinkGenerator shortlinkGenerator;
 
     public String findLongURLbyShort(String shortUrl){
        String longUrl = dao.findURLByShortName(shortUrl).getLongUrl();
        return longUrl;
     }
 
-    public String saveUrltoDB(String originalUrl) throws JsonParseException, JsonMappingException, IOException{
+    public String saveUrltoDB(String originalUrl) throws IOException{
 
-        String shortUrl = generateShortUrl();
+        String shortUrl = shortlinkGenerator.generateShortUrl();
         dao.saveOriginalAndShortUrltoDB(shortUrl, prepareUrl(originalUrl));
         return shortUrl;
-    }
-
-    private String generateShortUrl() {
-        return "govno";
     }
 
     private String prepareUrl(String originalUrl) throws IOException{

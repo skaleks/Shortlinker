@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository("shortlinkJDBC")
-public class ShortlinkJDBCImpl implements ShortlinkJDBC{
+public class ShortlinkJDBCImpl implements ShortlinkRepository{
 
     @Autowired
     JdbcTemplate jdbcTemplate;
