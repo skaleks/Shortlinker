@@ -1,5 +1,9 @@
 package com.kirstreltsov.controller;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.kirstreltsov.service.ShortlinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +22,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/")
 @AllArgsConstructor
 public class MainController {
+
 
   @Autowired
   private final ShortlinkService service;
@@ -42,7 +47,8 @@ public class MainController {
 	}
 
   @RequestMapping(value = "/", consumes="application/json", produces = "application/json")
-  public @ResponseBody String createShortUrl(@RequestBody String originalUrl){
-    return originalUrl + " govno";
+  public @ResponseBody String createShortUrl(@RequestBody String originalUrl) throws JsonParseException, JsonMappingException, IOException{
+
+    return service.saveUrltoDB(originalUrl);
   }
 }

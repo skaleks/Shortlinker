@@ -6,5 +6,5 @@ public interface ShortlinkJDBC{
 
     public URLS findURLByShortName(String shortUrl);
 
-    public int saveLongURLtoDB(String shortUrl,String longUrl);
+    public int saveOriginalAndShortUrltoDB(String shortUrl,String longUrl);
 }

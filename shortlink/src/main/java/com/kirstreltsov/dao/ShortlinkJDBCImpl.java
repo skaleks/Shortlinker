@@ -22,7 +22,7 @@ public class ShortlinkJDBCImpl implements ShortlinkJDBC{
     }
 
     @Override
-    public int saveLongURLtoDB(String shortUrl, String longUrl) {
-        return jdbcTemplate.update("insert into url (short_Url, long_Url) values(?,?)", shortUrl ,longUrl);
+    public int saveOriginalAndShortUrltoDB(String shortUrl, String originalUrl) {
+        return jdbcTemplate.update("INSERT INTO URLS (short_Url, long_Url) VALUES(?,?)", shortUrl ,originalUrl);
     }
 }
