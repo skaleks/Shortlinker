@@ -1,7 +1,7 @@
 # Shortlinker
 > _Test task for the position of Junior Java Backend Dev at Nord.Codes
 
-#### Shortlinker - это прототип сервиса генерации коротких ссылок (по типу goo.gl, bitly, Ow.ly)
+#### Shortlinker is a prototype service for generating short links (like goo.gl, bitly, Ow.ly)
 
 ## Features
 
