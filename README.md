@@ -23,3 +23,4 @@
 cd shortlink
 mvn spring-boot:run
 ```
+##### The application is available at http://localhost:8080
