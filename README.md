@@ -12,7 +12,8 @@
 
 - Java 8
 - JavaScript
-- Spring Boot
+- Spring Boot(MVC)
+- JDBC
 - Maven
 
 ## Installation
