@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ShortlinkService {
 
     Logger LOGGER = LoggerFactory.getLogger(ShortlinkService.class);
+    private final String DOMAIN_NAME = "http://localhost:8080/";
 
     @Autowired
     ShortlinkRepository dao;
@@ -33,12 +34,12 @@ public class ShortlinkService {
 
         String shortUrl = shortlinkGenerator.generateShortUrl();
         dao.saveOriginalAndShortUrltoDB(shortUrl, prepareUrl(originalUrl));
-        return shortUrl;
+        return DOMAIN_NAME + shortUrl;
     }
 
     private String prepareUrl(String originalUrl) throws IOException{
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = mapper.readTree(originalUrl);
-        return jsonNode.path("targetUrl").asText(); 
+        return jsonNode.path("userLink").asText(); 
     }
 }
